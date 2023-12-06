@@ -25,7 +25,7 @@ import { api } from "@/convex/_generated/api";
 // import { useSearch } from "@/hooks/use-search";
 // import { useSettings } from "@/hooks/use-settings";
 
-// import { UserItem } from "./user-item";
+import { UserItem } from "./user-item";
 // import { Item } from "./item";
 // import { DocumentList } from "./document-list";
 // import { TrashBox } from "./trash-box";
@@ -153,13 +153,13 @@ export const Navigation = () => {
         >
           <ChevronsLeft className="w-6 h-6" />
         </div>
-        {/* <div>
+        <div>
           <UserItem />
-          <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
+          {/* <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
           <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
-          <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
+          <Item onClick={handleCreate} label="New page" icon={PlusCircle} /> */}
         </div>
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <DocumentList />
           <Item onClick={handleCreate} icon={Plus} label="Add a page" />
           <Popover>
