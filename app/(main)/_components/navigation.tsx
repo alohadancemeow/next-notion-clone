@@ -29,7 +29,7 @@ import { UserItem } from "./user-item";
 import { Item } from "./item";
 import { DocumentList } from "./document-list";
 import { TrashBox } from "./trash-box";
-// import { Navbar } from "./navbar";
+import { Navbar } from "./navbar";
 
 export const Navigation = () => {
   const router = useRouter();
@@ -188,7 +188,7 @@ export const Navigation = () => {
           isMobile && "left-0 w-full"
         )}
       >
-        {/* {!!params.documentId ? (
+        {!!params.documentId ? (
           <Navbar isCollapsed={isCollapsed} onResetWidth={resetWidth} />
         ) : (
           <nav className="w-full px-3 py-2 bg-transparent">
@@ -200,7 +200,7 @@ export const Navigation = () => {
               />
             )}
           </nav>
-        )} */}
+        )}
       </div>
     </>
   );
