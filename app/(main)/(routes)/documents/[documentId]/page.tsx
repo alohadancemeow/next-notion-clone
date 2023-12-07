@@ -6,7 +6,7 @@ import { useMemo } from "react";
 
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-// import { Toolbar } from "@/components/toolbar";
+import { Toolbar } from "@/components/toolbar";
 // import { Cover } from "@/components/cover";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -58,9 +58,10 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
   return (
     <div className="pb-40">
       {/* <Cover url={document.coverImage} /> */}
+      Cover image
       <div className="mx-auto md:max-w-3xl lg:max-w-4xl">
-        {/* <Toolbar initialData={document} />
-        <Editor onChange={onChange} initialContent={document.content} /> */}
+        <Toolbar initialData={document} />
+        {/* <Editor onChange={onChange} initialContent={document.content} /> */}
       </div>
     </div>
   );
