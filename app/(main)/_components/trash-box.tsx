@@ -12,12 +12,16 @@ import { Spinner } from "@/components/spinner";
 import { Input } from "@/components/ui/input";
 import { ConfirmModal } from "@/components/modals/confirm-modal";
 
+import { useRomveCover } from "@/hooks/use-remove-cover";
+
 export const TrashBox = () => {
   const router = useRouter();
   const params = useParams();
   const documents = useQuery(api.documents.getTrash);
   const restore = useMutation(api.documents.restore);
   const remove = useMutation(api.documents.remove);
+
+  const { removeCoverFromEdgestore } = useRomveCover();
 
   const [search, setSearch] = useState("");
 
@@ -43,8 +47,11 @@ export const TrashBox = () => {
     });
   };
 
-  const onRemove = (documentId: Id<"documents">) => {
+  const onRemove = (documentId: Id<"documents">, url: string | undefined) => {
     const promise = remove({ id: documentId });
+
+    // fixed: remove image from edgestore
+    removeCoverFromEdgestore(url);
 
     toast.promise(promise, {
       loading: "Deleting note...",
@@ -96,7 +103,9 @@ export const TrashBox = () => {
               >
                 <Undo className="w-4 h-4 text-muted-foreground" />
               </div>
-              <ConfirmModal onConfirm={() => onRemove(document._id)}>
+              <ConfirmModal
+                onConfirm={() => onRemove(document._id, document.coverImage)}
+              >
                 <div
                   role="button"
                   className="p-2 rounded-sm hover:bg-neutral-200 dark:hover:bg-neutral-600"

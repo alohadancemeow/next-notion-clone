@@ -1,13 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useMutation } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { toast } from "sonner";
 
 import { Id } from "@/convex/_generated/dataModel";
 import { api } from "@/convex/_generated/api";
 import { Button } from "@/components/ui/button";
 import { ConfirmModal } from "@/components/modals/confirm-modal";
+
+import { useRomveCover } from "@/hooks/use-remove-cover";
 
 interface BannerProps {
   documentId: Id<"documents">;
@@ -19,8 +21,17 @@ export const Banner = ({ documentId }: BannerProps) => {
   const remove = useMutation(api.documents.remove);
   const restore = useMutation(api.documents.restore);
 
+  const document = useQuery(api.documents.getById, {
+    documentId,
+  });
+
+  const { removeCoverFromEdgestore } = useRomveCover();
+
   const onRemove = () => {
     const promise = remove({ id: documentId });
+
+    // fixed: remove image from edgestore
+    removeCoverFromEdgestore(document?.coverImage);
 
     toast.promise(promise, {
       loading: "Deleting note...",
